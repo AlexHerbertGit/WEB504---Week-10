@@ -72,3 +72,46 @@ function getCardData() {
 }
 
 //Add Card to local storage
+function setCardData(cards) {
+    localStorage.setItem('cards', JSON.stringify(cards));
+    window.location.reload();
+}
+
+createCards();
+
+//Event Listeners
+
+//Next Button
+nextbtn.addEventListener('click', () => {
+    cardsElement[currentActiveCard].className = 'card left';
+
+    currentActiveCard = currentActiveCard + 1;
+
+    if (currentActiveCard > cardsElement.length - 1) {
+        currentActiveCard = cardsElement.length - 1;
+    }
+
+    cardsElement[currentActiveCard].className = 'card active';
+
+    updateCurrentText();
+});
+
+//Previous button
+prevBtn.addEventListener('click', () => {
+    cardsElement[currentActiveCard].className = 'card right';
+
+    currentActiveCard = currentActiveCard - 1;
+
+    if (currentActiveCard < 0) {
+        currentActiveCard = 0;
+    }
+
+    cardsElement[currentActiveCard].className = 'card active';
+
+    updateCurrentText();
+});
+
+//Show add container
+showBtn.addEventListener('click', () => addContainer.classList.add('show'));
+//Hide add container
+hideBtn.addEventListener('click', () => addContainer.classList.remove('show'));
