@@ -22,7 +22,7 @@ const cardData = getCardData()
 
 //Create Cards
 function createCards() {
-    cardsData.forEach((data, index) => createCard(data, index));
+    cardData.forEach((data, index) => createCard(data, index));
 }
 
 function createCard(data, index) {
@@ -82,23 +82,25 @@ createCards();
 //Event Listeners
 
 //Next Button
-nextbtn.addEventListener('click', () => {
-    cardsElement[currentActiveCard].className = 'card left';
+nextBtn.addEventListener('click', () => {
+    cardsEl[currentActiveCard].classList.remove('active');
+    cardsEl[currentActiveCard].classList.add('left');
 
     currentActiveCard = currentActiveCard + 1;
 
-    if (currentActiveCard > cardsElement.length - 1) {
-        currentActiveCard = cardsElement.length - 1;
+    if (currentActiveCard > cardsEl.length - 1) {
+        currentActiveCard = cardsEl.length - 1;
     }
 
-    cardsElement[currentActiveCard].className = 'card active';
-
+    cardsEl[currentActiveCard].classList.add('active');
     updateCurrentText();
 });
 
+
 //Previous button
 prevBtn.addEventListener('click', () => {
-    cardsElement[currentActiveCard].className = 'card right';
+    cardsEl[currentActiveCard].classList.remove('active');
+    cardsEl[currentActiveCard].classList.add('right');
 
     currentActiveCard = currentActiveCard - 1;
 
@@ -106,8 +108,7 @@ prevBtn.addEventListener('click', () => {
         currentActiveCard = 0;
     }
 
-    cardsElement[currentActiveCard].className = 'card active';
-
+    cardsEl[currentActiveCard].classList.add('active');
     updateCurrentText();
 });
 
@@ -115,4 +116,26 @@ prevBtn.addEventListener('click', () => {
 showBtn.addEventListener('click', () => addContainer.classList.add('show'));
 //Hide add container
 hideBtn.addEventListener('click', () => addContainer.classList.remove('show'));
+
+
+//Add new card
+addQuestionBtn.addEventListener('click', () => {
+    const question = questionElement.value;
+    const answer = answerElement.value;
+    console.log(question, answer);
+
+    if (question.trim() && answer.trim()) {
+        const newCard = { question, answer};
+
+        createCard(newCard);
+
+        questionElement.value = '';
+        answerElement.value = '';
+
+        addContainer.classList.remove('show');
+
+        cardData.push(newCard);
+        setCardData(cardData);
+    }
+});
 
