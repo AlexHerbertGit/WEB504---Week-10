@@ -83,8 +83,8 @@ createCards();
 
 //Next Button
 nextBtn.addEventListener('click', () => {
-    cardsEl[currentActiveCard].classList.remove('active');
-    cardsEl[currentActiveCard].classList.add('left');
+    cardsElement[currentActiveCard].classList.remove('active');
+    cardsElement[currentActiveCard].classList.add('left');
 
     currentActiveCard = currentActiveCard + 1;
 
@@ -92,15 +92,15 @@ nextBtn.addEventListener('click', () => {
         currentActiveCard = cardsEl.length - 1;
     }
 
-    cardsEl[currentActiveCard].classList.add('active');
+    cardsElement[currentActiveCard].classList.add('active');
     updateCurrentText();
 });
 
 
 //Previous button
 prevBtn.addEventListener('click', () => {
-    cardsEl[currentActiveCard].classList.remove('active');
-    cardsEl[currentActiveCard].classList.add('right');
+    cardsElement[currentActiveCard].classList.remove('active');
+    cardsElement[currentActiveCard].classList.add('right');
 
     currentActiveCard = currentActiveCard - 1;
 
@@ -108,7 +108,7 @@ prevBtn.addEventListener('click', () => {
         currentActiveCard = 0;
     }
 
-    cardsEl[currentActiveCard].classList.add('active');
+    cardsElement[currentActiveCard].classList.add('active');
     updateCurrentText();
 });
 
@@ -137,5 +137,13 @@ addQuestionBtn.addEventListener('click', () => {
         cardData.push(newCard);
         setCardData(cardData);
     }
+});
+
+//Clear cards button
+
+clearBtn.addEventListener('click' , () => {
+    localStorage.clear();
+    cardsContainer.innerHTML = '';
+    window.location.reload();
 });
 
