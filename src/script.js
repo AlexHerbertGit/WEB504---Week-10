@@ -58,3 +58,17 @@ cardsContainer.appendChild(card);
 updateCurrentText();
 
 }
+
+//Show number of cards
+function updateCurrentText() {
+    currentElement.innerText = `${currentActiveCard + 1}/${cardsElement.length}`; //Add 1 to it because it is 0 by default
+}
+
+// Get cards from local storage
+function getCardData() {
+    //Local storage only store string so we will take the array fetch back as an array using parse
+    const cards = JSON.parse(localStorage.getItem('cards'));
+    return cards === null ? [] : cards; // If cards are null return an empty array
+}
+
+//Add Card to local storage
